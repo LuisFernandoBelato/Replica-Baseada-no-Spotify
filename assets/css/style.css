@@ -1,0 +1,910 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto-Regular.ttf') format('truetype'); /* Ajuste o formato conforme o tipo de fonte */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+}
+
+body{
+    background-color: rgb(245,245,245);
+}
+
+.cabecalho-login{
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 85px;
+    background-color: rgb(245,245,245);
+}
+
+.cabecalho-login #cabecalho-login-logo{
+    width: 50%;
+    height: 85px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cabecalho-login #cabecalho-login-logo h1{
+    color: rgb(251,86,48);
+    font-size: 25px;
+    display: inline;
+}
+
+.cabecalho-login #cabecalho-login-logo p{
+    color: rgb(34,34,34);
+    font-size: 1.5rem;
+    padding-left: 5%;
+    display: inline;
+}
+
+.cabecalho-login #cabecalho-login-logo img{
+    height: 60px;
+    width: 60px;
+    margin-top: 10px;
+    display: inline;
+}
+
+.cabecalho-login #cabecalho-login-ajuda{
+    width: 45%;
+    height: 85px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.cabecalho-login #cabecalho-login-ajuda p{
+    color: rgb(251,86,48);
+    font-size: .875rem;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+/* ========= FIM CABEÇALHO LOGIN ========== */
+
+
+/* ========= INICIO MENU ========== */
+
+.menu-horizontal{
+    width: 100%;
+    background-color: rgb(251, 119, 48);
+}
+
+.menu-horizontal ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-horizontal ul li{
+    list-style: none;
+}
+
+.menu-horizontal ul li a{
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+}
+
+.menu-horizontal ul li a:hover{
+    font-weight: bold;
+    color: rgb(251,86,48);
+    background-color: rgb(255, 255, 255);
+}
+
+/* ========= FIM MENU ========== */
+
+
+/* ========= INICIO CONTEUDO LOGIN ========== */
+
+.conteudo-login{
+    width: 100%;
+    height: 600px;
+    background-color: rgb(251,86,48);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-login .conteudo-login-info{
+    width: 30%;
+    height: 550px;
+    background-color: rgb(255,255,255);
+    border-radius: 5px;
+}
+
+.conteudo-login .conteudo-login-info .form-login{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1.5em;
+    border-radius: 1px;
+}
+
+#label-log{
+    color: rgb(34,34,34);
+    font-size: 1.25rem;
+}
+
+#input-log{
+    border-color: rgba(0,0,0,.09);
+    color: rgb(0, 0, 0);
+    width: 75%;
+    padding-left: 5%;
+}
+
+#input-log :hover{
+    border-color: rgb(0, 0, 0);
+}
+
+#botao-log{
+    background-color: rgb(251,86,48);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    width: 80%;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.conteudo-login .conteudo-login-info .conteudo-login-recuperacao{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.conteudo-login .conteudo-login-info .conteudo-login-recuperacao a{
+    text-decoration: none;
+    color: rgb(0,85,170);
+    font-size: 0.8rem;
+}
+
+.conteudo-login .conteudo-login-info .conteudo-login-alegoria{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-login .conteudo-login-info .conteudo-login-alegoria hr{
+    width: 50%;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    background-color: rgba(0,0,0,.09);
+}
+
+.conteudo-login .conteudo-login-info .conteudo-login-alegoria p{
+    text-transform: uppercase;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    color: rgba(0,0,0,.65);
+}
+
+.conteudo-login .conteudo-login-info .conteudo-login-sociais{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-flow: row wrap;
+}
+
+.conteudo-login .conteudo-login-info .conteudo-login-sociais button{
+    width: 30%;
+    background-color: rgb(255,255,255);
+    border-color: rgba(0,0,0,.15);
+    border-radius: 0.3em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.conteudo-login .conteudo-login-info .conteudo-login-sociais button img{
+    width: 20%;
+    margin-right: 0.45em;
+}
+
+.conteudo-login .conteudo-login-info p{
+    text-align: center;
+    margin-top: 25px;
+    color: rgb(195, 195, 195);
+}
+
+.conteudo-login .conteudo-login-info a{
+    color: rgb(251,86,48);
+    text-decoration: none;
+}
+
+/* ========= FIM CONTEUDO LOGIN ========== */
+
+
+/* ========= INICIO CONTEUDO REDEFINIR ========== */
+
+.conteudo-redefinir-senha{
+    width: 100%;
+    height: 600px;
+    background-color: rgb(255,255,255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-redefinir-senha .form-redefinir-senha{
+    width: 40%;
+    height: 300px;
+    margin-top: 1.5em;
+    box-sizing: border-box;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,.14);
+    border-radius: 4px;
+}
+
+.conteudo-redefinir-senha .form-redefinir-senha a img{
+    margin-top: 0.85em;
+    margin-left: 1.0em;
+}
+
+.conteudo-redefinir-senha .form-redefinir-senha .form-redefinir{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* ========= FIM CONTEUDO REDEFINIR ========== */
+
+
+/* ========= INICIO CONTEUDO REDEFINIR ========== */
+.conteudo-home{
+    width: 80%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 10%;
+    background-color: rgb(255,255,255);
+}
+
+.conteudo-home .conteudo-home-carousel{
+    width: 100%;
+    height: 320px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo-home .conteudo-home-carousel #img-carousel{
+    width: 100%;
+    height: 270px;
+}
+/* ========= FIM CONTEUDO REDEFINIR ========== */
+
+
+/* ========= INICIO CONTEUDO HOME ========== */
+
+.conteudo-home img{
+    width: 90%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-titulo{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(255,255,255);
+}
+
+
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-titulo h1{
+    text-transform: uppercase;
+    color: rgb(251, 119, 48);
+    font-size: 16px;
+}
+
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-titulo hr{
+    width: 100%;
+    border: 2px solid rgb(251,86,48);
+}
+
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto{
+    display: grid;
+    grid-gap: 0.75em;
+    grid-template-columns: auto auto auto auto auto;
+    margin-left: 1em;
+
+}
+
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto .produto-item-grid{
+    width: 90%;
+    height: 250px;
+    box-sizing: border-box;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,.14);
+    border-radius: 4px;
+    text-decoration: none;
+    margin-bottom: 5vh;
+}
+
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto .produto-item-grid:hover{
+    border: 2px solid rgb(251,86,48);
+}
+
+.produto-item-grid img{
+    width: 90%;
+    height: 125px;
+}
+
+.produto-item-grid p{
+    font-size: 14px;
+    margin-left: 0.5em;
+    color: rgba(0,0,0,.65);
+}
+
+.produto-item-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.produto-item-info #valor{
+    font-size: 14px;
+    margin-left: 0.5em;
+    color: rgb(251, 119, 48);
+}
+
+.produto-item-grid #disponiveis{
+    font-size: 14px;
+    margin-right: 0.5em;
+    color: rgb(195, 195, 195);
+}
+/* ========= FIM CONTEUDO HOME ========== */
+
+
+/* ========= INICIO CONTEUDO CADASTRO ========== */
+
+.conteudo-cadastro{
+    width: 100%;
+    background-color: rgb(195, 195, 195);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-cadastro .conteudo-formulario-cadastro{
+    width: 40%;
+    background-color: rgb(255,255,255);
+    border-radius: 5px;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.conteudo-cadastro .conteudo-formulario-cadastro p{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: rgb(195, 195, 195);
+}
+
+.conteudo-cadastro .conteudo-formulario-cadastro form label, input{
+    display: block;
+    height: 40px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-radius: 1px;
+}
+
+.conteudo-cadastro .conteudo-formulario-cadastro label{
+    color: rgb(251,86,48);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.conteudo-cadastro .conteudo-formulario-cadastro input{
+    border-color: rgba(0,0,0,.09);
+    color: rgb(0, 0, 0);
+    width: 55%;
+    padding-left: 5%;
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: 1px solid rgb(251,86,48);
+    background-color: rgb(255, 255, 255);    
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: rgb(251,86,48);
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+  
+input[type=file]::file-selector-button:hover {
+    background-color: rgb(251,86,48);
+}
+
+.conteudo-cadastro .conteudo-formulario-cadastro #lbl-arquivo{
+    color: rgb(251,86,48);
+    font-size: 16px;
+    text-align: center;
+}
+
+.conteudo-cadastro .conteudo-formulario-cadastro #botao{
+    background-color: rgb(251,86,48);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    width: 60%;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.conteudo-cadastro .conteudo-formulario-cadastro a{
+    color: rgb(251,86,48);
+    text-decoration: none;
+}
+
+/* ========= FIM CONTEUDO CADASTRO ========== */
+
+
+/* ========= INICIO CONTEUDO VER PRODUTO ========== */
+
+.conteudo-ver{
+    width: 100%;
+    background-color: rgb(195, 195, 195);
+}
+
+.conteudo-ver .conteudo-ver-descobertas{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;  
+    background-color: rgb(255,255,255);
+}
+
+.conteudo-ver .conteudo-ver-descobertas .conteudo-ver-descobertas-titulo{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(255,255,255);
+}
+
+
+.conteudo-ver .conteudo-ver-descobertas .conteudo-ver-descobertas-titulo h1{
+    text-transform: uppercase;
+    color: rgb(251, 119, 48);
+    font-size: 16px;
+}
+
+.conteudo-ver .conteudo-ver-descobertas .conteudo-ver-descobertas-titulo hr{
+    width: 100%;
+    border: 2px solid rgb(251,86,48);
+}
+
+.conteudo-ver .conteudo-ver-descobertas .conteudo-ver-descobertas-produto{
+    width: 100%;
+    display: grid;
+    grid-gap: 0.75em;
+    grid-template-columns: auto auto auto auto auto;
+    background-color: rgb(255,255,255);
+}
+
+.conteudo-ver .conteudo-ver-descobertas .conteudo-ver-descobertas-produto .ver-produto-item-grid{
+    width: 90%;
+    height: 400px;
+    box-sizing: border-box;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,.14);
+    border-radius: 4px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 0.75em;
+}
+
+.conteudo-ver .conteudo-ver-descobertas .conteudo-ver-descobertas-produto .ver-produto-item-grid:hover{
+    border: 2px solid rgb(251,86,48);
+}
+
+.ver-produto-item-grid img{
+    width: 90%;
+    height: 125px;
+}
+
+.ver-produto-item-grid p{
+    font-size: 14px;
+    margin-left: 0.5em;
+    color: rgba(0,0,0,.65);
+}
+
+.ver-produto-item-grid .ver-produto-detalhes{
+    width: 90%;
+}
+
+.ver-produto-item-grid .ver-produto-detalhes #nome-produto{
+    color: rgba(0,0,0,.65);
+}
+
+.ver-grupo-dupla-grid{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-top: 1.5em;
+    margin-left: 0.5em;
+    margin-bottom: 1.5em;
+}
+
+.ver-grupo-dupla-grid #titulo-produto{
+    font-size: 14px;
+    color: rgba(0,0,0,.65);
+}
+
+.ver-grupo-dupla-grid #info-produto{
+    font-size: 14px;
+    color: rgb(195, 195, 195);
+}
+
+.ver-produto-item-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ver-produto-item-info #valor{
+    font-size: 14px;
+    margin-left: 0.5em;
+    color: rgb(251, 119, 48);
+}
+
+.ver-produto-item-grid #disponiveis{
+    font-size: 14px;
+    margin-right: 0.5em;
+    color: rgb(195, 195, 195);
+}
+/* ========= FIM CONTEUDO VER PRODUTO ========== */
+
+.conteudo-visualizar{
+    width: 100%;
+    background-color: rgb(195, 195, 195);
+}
+
+.conteudo-visualizar .conteudo-visualizar-box{
+    width: 80%;
+    margin-left: 10%;
+    background-color: rgb(240,240,240);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.conteudo-visualizar .conteudo-visualizar-box h1{
+    color: rgb(251,86,48);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 25px;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.conteudo-visualizar .conteudo-visualizar-box .conteudo-bloco{
+    width: 60%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.conteudo-visualizar .conteudo-visualizar-box .conteudo-bloco h2{
+    color: rgb(251,86,48);
+    font-weight: bold;
+}
+
+.rodape{
+    width: 80%;
+    height: 400px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.rodape .conteudo-rodape-info{
+    width: 100%;
+    height: 300px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape .conteudo-rodape-info .conteudo-rodape{
+    width: 20%;
+    height: 250px;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.rodape .conteudo-rodape-info .conteudo-rodape h5{
+    text-transform: uppercase;
+    color: rgba(0,0,0,.87);
+    margin-bottom: 1.5rem;
+}
+
+.rodape .conteudo-rodape-info .conteudo-rodape a{
+    color: rgba(0,0,0,.65);
+    text-decoration: none;
+    font-size: .75rem;
+    margin-bottom: 0.65rem;
+}
+
+.rodape .conteudo-rodape-info .conteudo-rodape a:hover{
+    color: rgb(251, 119, 48);
+}
+
+.rodape .conteudo-rodape-info .conteudo-rodape .conteudo-rodape-pagamento{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-flow: row wrap;
+}
+
+.rodape .conteudo-rodape-info .conteudo-rodape .conteudo-rodape-pagamento #img-pagamento{
+    background-color: rgb(255,255,255);
+    border-radius: 0.2em;
+    margin-right: 0.75em;
+    margin-bottom: 0.75em;
+}
+
+.rodape .conteudo-rodape-info .conteudo-rodape #img-sociais{
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.75em;
+}
+
+.rodape .conteudo-rodape-info .conteudo-rodape #img-store{
+    background-color: rgb(255,255,255);
+    margin-bottom: 1.5em;
+}
+
+.rodape hr{
+    color: rgba(0,0,0,.09);
+}
+
+.rodape p{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgba(0,0,0,.87);
+}
+
+/* ========= FIM LOGIN ========== */
+
+header{
+    height: 85px;
+    width: 100%;
+    background-color: rgb(251,86,48);
+    display: flex;
+    justify-content: center;
+}
+
+header #cabecalho-logo h1{
+    color: rgb(255, 255, 255);
+    font-size: 45px;
+    display: inline;
+}
+
+header #cabecalho-logo img{
+    height: 60px;
+    width: 60px;
+    margin-top: 5px;
+    display: inline;
+}
+
+header #cabecalho-logo{
+    width: 18%;
+    margin-left: 2%;
+    margin-right: 30%;
+}
+
+header #cabecalho-logout{
+    width: 20%;
+    margin-left: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+header #cabecalho-logout a{
+    margin-right: 10%;
+    text-decoration: none;
+    color: rgb(255,255,255);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.produto-imagem{
+    margin-top: 50px;
+    margin-left: 10%;
+    height: 600px;
+    width: 40%;
+    float: left;
+    position: absolute;
+}
+
+.produto-miniatura{
+    height: 600px;
+    width: 10%;
+    float: left;
+}
+
+.produto-miniatura img{
+    height: 90px;
+    margin-top: 10px;
+    display: block;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.produto-miniatura img:hover{
+    opacity: 1;
+    border: 2px solid rgb(251,86,48);
+}
+
+.produto-principal{
+    height: 600px;
+    width: 75%;
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-right: 5%;
+    float: right;
+}
+
+.produto-principal img{
+    height: 490px;
+    width: 100%;
+}
+
+.produto-detalhes{
+    margin-top: 50px;
+    margin-right: 10%;
+    height: 600px;
+    width: 40%;
+    float: right;
+}
+
+.produto-detalhes p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.produto-detalhes .botao{
+    height: 40px;
+    cursor: pointer;
+    background-color: rgba(255,255,255);
+    color: rgba(0,0,0,.8);
+    border: 1px solid rgba(0,0,0,.09);
+    margin: 10px 8px 8px 10px;
+    padding: 0.25rem 0.75rem;
+    justify-content: center;
+}
+
+.produto-detalhes .botao:hover{
+    color: rgb(251,86,48);
+    border: 1px solid rgb(251,86,48);
+}
+
+.produto-detalhes #botaoComprar{
+    height: 60px;
+    cursor: pointer;
+    background-color: rgb(251,86,48);
+    color: rgb(255,255,255);
+    border: 1px solid rgb(251,86,48);
+    margin: 10px 8px 8px 10px;
+    padding: 0.25rem 0.75rem;
+    justify-content: center;
+}
+
+.produto-detalhes #botaoComprar:hover{
+    opacity: 0.9;
+}
+
+.produto-detalhes #precoProduto{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.875rem;
+    color: rgb(251,86,48);
+}
+
+
+
+
+
+
+
+
+/* Estilo do Modal */
+#editModal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none; /* Modal escondido inicialmente */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
