@@ -11,9 +11,8 @@ class UsuarioController
     } = req.body;
 
     const usuarioExiste = await Usuario.findByEmail(email);
-
-    if (usuarioExiste)
-        return res.status(400).json({message: "Ja existe um usuario com esse Email"});
+    if (!usuarioExiste)
+        return res.status(400).json({message: "Já existe um usuário com esse Email"});
 
     try
     {
@@ -44,7 +43,7 @@ class UsuarioController
 
   static async getUsuarioById (req, res)
   {
-    const { id } = req.query;
+    const { id } = req.params;
     let usuario;
       try
       {
@@ -63,11 +62,11 @@ class UsuarioController
     
   static async updateUsuario (req, res)
   {
-    const { id } = req.query;
+    const { id } = req.params;
     const newUsuario = req.body;
 
     const usuarioExistente = await Usuario.findById(id);
-
+  
     try
     {
       if (usuarioExistente)
@@ -87,7 +86,7 @@ class UsuarioController
 
   static async deleteUsuario (req, res)
   {
-    const { id } = req.query;
+    const { id } = req.params;
 
     try
     {

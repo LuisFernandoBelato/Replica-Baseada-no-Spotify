@@ -6,7 +6,7 @@ const router = express.Router();
 
 // AUTENTICAÇÃO
 
-router.get("/login", AuthController.Login);
+router.post("/login", AuthController.Login);
 
 // USUÁRIOS
 
