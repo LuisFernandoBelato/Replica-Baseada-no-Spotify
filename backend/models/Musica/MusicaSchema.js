@@ -13,6 +13,6 @@ const MusicaSchema = new mongoose.Schema(
     }
 )
 
-const MusicaModel = mongoose.model('musica', MusicaSchema);
+const MusicaModel = mongoose.model('Musica', MusicaSchema);
 
 export default MusicaModel;

@@ -1,4 +1,4 @@
-# Spotify
+# Spotify---LP-2
 
 ## Integrantes
 
@@ -13,7 +13,7 @@
   - docker build -t mongodb-image .
   - docker run -d -p 27017:27017 --name mongodb-container mongodb-image
 
-
+// MUDAR ESSES COMANDOS DO DOCKER DPS
 
 
 SPOTIFY - Entidades 3

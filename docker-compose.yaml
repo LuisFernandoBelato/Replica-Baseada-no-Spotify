@@ -1,0 +1,51 @@
+version: '3.8'
+
+volumes:
+  mongodb_data:
+
+networks:
+  app_net:
+    driver: bridge
+
+services:
+  database:
+    container_name: MongoDB
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: g59V14ZIRvvIiue8
+      MONGO_INITDB_DATABASE: appdatabase
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app_net
+
+  express-server:
+    container_name: Express-Back-End
+    build:
+      context: .
+      dockerfile: Dockerfile-back
+    ports:
+      - 8000:8000
+    networks:
+      - app_net
+    depends_on:
+      - database
+    environment:
+      MONGO_HOST: database
+      MONGO_PORT: 27017
+      MONGO_DB: appdatabase
+      MONGO_USER: admin
+      MONGO_PASSWORD: g59V14ZIRvvIiue8
+
+  application:
+    container_name: Vue-Front-End
+    build:
+      context: .
+      dockerfile: Dockerfile-front
+    ports:
+      - 3000:3000
+    networks:
+      - app_net
