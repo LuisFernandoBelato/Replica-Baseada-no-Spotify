@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-import Usuario from '../Usuario/UsuarioSchema.js';
 
 const MusicaSchema = new mongoose.Schema(
     {
         nome: {type: String, require: true},
-        autor: {type: Usuario, require: true}, // Um usuário comum do sistema
+        autor: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true }, // Referência ao _id da coleção 'Usuario'
         filePath: {type: String, require: true},
         genero: {type: String, require: true}
     },

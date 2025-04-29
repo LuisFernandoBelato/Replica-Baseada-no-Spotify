@@ -5,8 +5,8 @@ class Musica
     constructor (nome, autor, filePath, genero)
     {
         this.nome = nome;
-        this.autor = autor;
-        this.filePath = filePath;
+        this.autor = autor ? autor : null; // _id do Autor
+        this.filePath = filePath ? filePath : null;
         this.genero = genero;
     }
 

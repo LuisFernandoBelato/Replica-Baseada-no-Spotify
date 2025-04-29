@@ -12,7 +12,7 @@ class UsuarioController
 
     const usuarioExiste = await Usuario.findByEmail(email);
     if (!usuarioExiste)
-        return res.status(400).json({message: "Já existe um usuário com esse Email"});
+        return res.status(400).json({message: "Já existe um Usuário com esse Email."});
 
     try
     {
@@ -23,7 +23,7 @@ class UsuarioController
     catch (error)
     {
         console.error("Erro ao Criar o Usuario: ", error);
-        return res.status(500).json({message: "Erro interno ao Criar o Usuario"});
+        return res.status(500).json({message: "Erro interno ao Criar o Usuario."});
     }
   }
 
@@ -37,7 +37,7 @@ class UsuarioController
     catch (error)
     {
         console.error("Erro ao Carregar os Usuários: ", error);
-        return res.status(500).json({message: "Erro ao Carregar os Usuários"});
+        return res.status(500).json({message: "Erro ao Carregar os Usuários."});
     }
   }
 
@@ -51,12 +51,12 @@ class UsuarioController
           if (usuario)
             return res.status(200).json(usuario);
           else
-            return res.status(400).json({message: "Usuário não encontrado"});
+            return res.status(400).json({message: "Usuário não encontrado."});
       }
       catch (error)
       {
           console.error("Erro ao Carregar o Usuário: ", error);
-          return res.status(500).json({message: "Erro ao Carregar o Usuário ", usuario});
+          return res.status(500).json({message: "Erro ao Carregar o Usuário. ", usuario});
       }
   }
     
@@ -64,23 +64,18 @@ class UsuarioController
   {
     const { id } = req.params;
     const newUsuario = req.body;
-
-    const usuarioExistente = await Usuario.findById(id);
   
     try
     {
-      if (usuarioExistente)
-      {
         if (await Usuario.update(id, newUsuario))
-          return res.status(201).json({updateUsuario: newUsuario, message: "Usuário atualizado com sucesso"});
-      }
-      else
-        return res.status(400).json({message: "Usuário não está cadastrado"});
+          return res.status(201).json({updateUsuario: newUsuario, message: "Usuário atualizado com sucesso !"});
+        else
+          return res.status(400).json({message: "Usuário não está cadastrado."});
     }
     catch (error)
     {
       console.error("Erro ao atualizar o Usuário: ", error);
-      return res.status(500).json({message: "Erro ao atualizar o Usuário"});
+      return res.status(500).json({message: "Erro ao atualizar o Usuário."});
     } 
   }
 
@@ -91,14 +86,14 @@ class UsuarioController
     try
     {
       if (await Usuario.delete(id))
-        return res.status(200).json({message: "Usuário deletado com Sucesso"});
+        return res.status(200).json({message: "Usuário deletado com Sucesso !"});
       else
-        return res.status(500).json({message: "Erro ao atualizar cliente"});
+        return res.status(500).json({message: "Erro ao atualizar o Usuário."});
     }
     catch (error)
     {
       console.error("Erro ao deletar o Usuário: ", error);
-      return res.status(500).json({message: "Erro ao deletar o Usuário"});
+      return res.status(500).json({message: "Erro ao deletar o Usuário."});
     } 
   }
 }
