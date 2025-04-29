@@ -6,21 +6,23 @@ class PlaylistController
   {
     const { 
       nome, 
-      autorId, 
-      filePath,
-      genero
+      descricao,
+      donoId, 
+      musicasIdsArray, // Array de Ids das Músicas
+      permission,
+      thumbnailPath
     } = req.body;
 
     try
     {
-        const novaMusica = new Musica(nome, autorId, filePath, genero); 
-        await novaMusica.save();
-        return res.status(201).json(novaMusica);
+        const novaPlaylist = new Playlist(nome, descricao, donoId, musicasIdsArray, permission, thumbnailPath); 
+        await novaPlaylist.save();
+        return res.status(201).json(novaPlaylist);
     }
     catch (error)
     {
-        console.error("Erro ao Criar a Musica: ", error);
-        return res.status(500).json({message: "Erro interno ao Criar a Musica."});
+        console.error("Erro ao Criar a Playlist: ", error);
+        return res.status(500).json({message: "Erro Interno ao Criar a Playlist."});
     }
   }
 
@@ -28,51 +30,51 @@ class PlaylistController
   {
     try
     {
-        const musicas = await Musica.findAll();
-        return res.status(200).json(musicas);
+        const playlists = await Playlist.findAll();
+        return res.status(200).json(playlists);
     }
     catch (error)
     {
-        console.error("Erro ao Carregar as Musicas: ", error);
-        return res.status(500).json({message: "Erro ao Carregar as Musicas."});
+        console.error("Erro ao Carregar as Playlists: ", error);
+        return res.status(500).json({message: "Erro Interno ao Carregar as Playlists."});
     }
   }
 
   static async getPlaylistById (req, res)
   {
     const { id } = req.params;
-    let musica;
+    let playlist;
     try
     {
-        musica = await Musica.findById(id);
-        if (musica)
-        return res.status(200).json(musica);
+        playlist = await Playlist.findById(id);
+        if (playlist)
+        return res.status(200).json(playlist);
         else
-        return res.status(400).json({message: "Música não encontrada."});
+        return res.status(400).json({message: "Playlist não encontrada."});
     }
     catch (error)
     {
-        console.error("Erro ao Carregar a Música: ", error);
-        return res.status(500).json({message: "Erro ao Carregar a Música. ", musica});
+        console.error("Erro ao Carregar a Playlist: ", error);
+        return res.status(500).json({message: "Erro Interno ao Carregar a Playlist. ", playlist});
     }
   }
     
   static async updatePlaylist (req, res)
   {
     const { id } = req.params;
-    const newMusica = req.body;
+    const newPlaylist = req.body;
 
     try
     {
-        if (await Musica.update(id, newMusica))
-            return res.status(201).json({updateMusica: newMusica, message: "Música atualizada com Sucesso !"});
+        if (await Playlist.update(id, newPlaylist))
+            return res.status(201).json({updatePlaylist: newPlaylist, message: "Playlist atualizada com Sucesso !"});
         else
-            return res.status(400).json({message: "Música não está cadastrada."});
+            return res.status(400).json({message: "Playlist não está cadastrada."});
     }
     catch (error)
     {
-        console.error("Erro ao atualizar a Música: ", error);
-        return res.status(500).json({message: "Erro ao atualizar a Música."});
+        console.error("Erro ao atualizar a Playlist: ", error);
+        return res.status(500).json({message: "Erro Interno ao atualizar a Playlist."});
     } 
   }
 
@@ -82,15 +84,15 @@ class PlaylistController
 
     try
     {
-      if (await Musica.delete(id))
-        return res.status(200).json({message: "Música deletada com Sucesso !"});
+      if (await Playlist.delete(id))
+        return res.status(200).json({message: "Playlist deletada com Sucesso !"});
       else
-        return res.status(500).json({message: "Erro ao atualizar a Música."});
+        return res.status(500).json({message: "Erro ao deletar a Playlist."});
     }
     catch (error)
     {
-      console.error("Erro ao deletar a Música: ", error);
-      return res.status(500).json({message: "Erro ao deletar a Música."});
+      console.error("Erro ao deletar a Playlist: ", error);
+      return res.status(500).json({message: "Erro Interno ao deletar a Playlist."});
     } 
   }
 }

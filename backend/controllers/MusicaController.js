@@ -8,12 +8,13 @@ class MusicaController
       nome, 
       autorId, 
       filePath,
+      thumbnailPath,
       genero
     } = req.body;
 
     try
     {
-        const novaMusica = new Musica(nome, autorId, filePath, genero); 
+        const novaMusica = new Musica(nome, autorId, filePath, thumbnailPath, genero); 
         await novaMusica.save();
         return res.status(201).json(novaMusica);
     }
@@ -34,7 +35,7 @@ class MusicaController
     catch (error)
     {
         console.error("Erro ao Carregar as Musicas: ", error);
-        return res.status(500).json({message: "Erro ao Carregar as Musicas."});
+        return res.status(500).json({message: "Erro Interno ao Carregar as Musicas."});
     }
   }
 
@@ -53,7 +54,7 @@ class MusicaController
     catch (error)
     {
         console.error("Erro ao Carregar a Música: ", error);
-        return res.status(500).json({message: "Erro ao Carregar a Música. ", musica});
+        return res.status(500).json({message: "Erro Interno ao Carregar a Música. ", musica});
     }
   }
     
@@ -72,7 +73,7 @@ class MusicaController
     catch (error)
     {
         console.error("Erro ao atualizar a Música: ", error);
-        return res.status(500).json({message: "Erro ao atualizar a Música."});
+        return res.status(500).json({message: "Erro Interno ao atualizar a Música."});
     } 
   }
 
@@ -90,7 +91,7 @@ class MusicaController
     catch (error)
     {
       console.error("Erro ao deletar a Música: ", error);
-      return res.status(500).json({message: "Erro ao deletar a Música."});
+      return res.status(500).json({message: "Erro Interno ao deletar a Música."});
     } 
   }
 }

@@ -34,4 +34,11 @@ router.get("/get-playlist/:id", PlaylistController.getPlaylistById);
 router.put("/edit-playlist/:id", PlaylistController.updatePlaylist);
 router.delete("/delete-playlist/:id", PlaylistController.deletePlaylist);
 
+
+// PENSAR EM COMO FAZER O GET DE PLAYLIST TRAZER SÓ AS PLAYLISTS DELE - TALVEZ USAR OS PERMISSIONS
+// PENSAR EM COMO FAZER O GET DE MÚSICAS TRAZER SÓ AS MÚSICAS DELE (PRO USUÁRIO ATUALIZAR E DELETAR SÓ AS DELE, O RESTO É PÚBLICO)
+
+    // - O PROBLEMA AQUI É QUE VINDO DO FRONT, AINDA NÃO SABEMOS QUAL USUÁRIO QUE ESTÁ FAZENDO A REQUISIÇÃO
+
+    
 export default router;

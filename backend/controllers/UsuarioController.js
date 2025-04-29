@@ -23,7 +23,7 @@ class UsuarioController
     catch (error)
     {
         console.error("Erro ao Criar o Usuario: ", error);
-        return res.status(500).json({message: "Erro interno ao Criar o Usuario."});
+        return res.status(500).json({message: "Erro Interno ao Criar o Usuario."});
     }
   }
 
@@ -37,7 +37,7 @@ class UsuarioController
     catch (error)
     {
         console.error("Erro ao Carregar os Usuários: ", error);
-        return res.status(500).json({message: "Erro ao Carregar os Usuários."});
+        return res.status(500).json({message: "Erro Interno ao Carregar os Usuários."});
     }
   }
 
@@ -56,7 +56,7 @@ class UsuarioController
       catch (error)
       {
           console.error("Erro ao Carregar o Usuário: ", error);
-          return res.status(500).json({message: "Erro ao Carregar o Usuário. ", usuario});
+          return res.status(500).json({message: "Erro Interno ao Carregar o Usuário. ", usuario});
       }
   }
     
@@ -75,7 +75,7 @@ class UsuarioController
     catch (error)
     {
       console.error("Erro ao atualizar o Usuário: ", error);
-      return res.status(500).json({message: "Erro ao atualizar o Usuário."});
+      return res.status(500).json({message: "Erro Interno ao atualizar o Usuário."});
     } 
   }
 
@@ -93,7 +93,7 @@ class UsuarioController
     catch (error)
     {
       console.error("Erro ao deletar o Usuário: ", error);
-      return res.status(500).json({message: "Erro ao deletar o Usuário."});
+      return res.status(500).json({message: "Erro Interno ao deletar o Usuário."});
     } 
   }
 }

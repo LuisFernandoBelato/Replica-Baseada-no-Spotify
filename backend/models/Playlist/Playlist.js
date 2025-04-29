@@ -2,12 +2,14 @@ import PlaylistModel from "./PlaylistSchema.js";
 
 class Playlist
 {
-    constructor (nome, descricao, dono, musicas)
+    constructor (nome, descricao, dono, musicas, permission, thumbnailPath)
     {
         this.nome = nome;
         this.descricao = descricao;
-        this.dono = dono;
-        this.musicas = musicas ? musicas : [];
+        this.dono = dono; // Usuário que criou a Playlist - Id
+        this.musicas = musicas ? musicas : []; // Lista de Músicas,
+        this.permission = permission;
+        this.thumbnailPath = thumbnailPath; // Arquivo da Capa da Playlist
     }
 
     async save () 
@@ -16,7 +18,9 @@ class Playlist
             nome: this.nome,
             descricao: this.descricao,
             dono: this.dono,
-            musicas: this.musicas ? this.musicas : []
+            musicas: this.musicas ? this.musicas : [],
+            permission: this.permission,
+            thumbnailPath: this.thumbnailPath
         });
 
         return await novaPlaylist.save();
