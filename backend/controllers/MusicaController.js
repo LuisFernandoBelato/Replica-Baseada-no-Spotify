@@ -57,7 +57,7 @@ class MusicaController
         return res.status(500).json({message: "Erro Interno ao Carregar a Música. ", musica});
     }
   }
-    
+  
   static async updateMusica (req, res)
   {
     const { id } = req.params;

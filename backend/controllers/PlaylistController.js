@@ -58,6 +58,22 @@ class PlaylistController
         return res.status(500).json({message: "Erro Interno ao Carregar a Playlist. ", playlist});
     }
   }
+  
+  static async getAllPlaylistsByUser (req, res)
+  {
+    const { userId } = req.params;
+
+    try
+    {
+        const playlists = await Playlist.findAllByUserId(userId);
+        return res.status(200).json(playlists);
+    }
+    catch (error)
+    {
+        console.error("Erro ao Carregar as Playlists do Usuário: ", error);
+        return res.status(500).json({message: "Erro Interno ao Carregar as Playlists do Usuário."});
+    }
+  }
     
   static async updatePlaylist (req, res)
   {

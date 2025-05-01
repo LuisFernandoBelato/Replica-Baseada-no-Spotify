@@ -11,7 +11,7 @@ class UsuarioController
     } = req.body;
 
     const usuarioExiste = await Usuario.findByEmail(email);
-    if (usuarioExiste)
+    if (usuarioExiste == [])
         return res.status(400).json({message: "Já existe um Usuário com esse Email."});
 
     try
