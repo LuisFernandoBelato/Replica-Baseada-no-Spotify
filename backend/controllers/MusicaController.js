@@ -39,6 +39,27 @@ class MusicaController
     }
   }
 
+  static async getAllMusicsByUser (req, res)
+  {
+    const { id } = req.params;
+    let musicas;
+    try
+    {
+        musicas = await Musica.findAllByUserId(id);
+        console.log("musicas = ", musicas);
+        console.log("id = ", id)
+        if (musicas)
+          return res.status(200).json(musicas);
+        else
+          return res.status(400).json({message: "Música não encontrada."});
+    }
+    catch (error)
+    {
+        console.error("Erro ao Carregar a Música: ", error);
+        return res.status(500).json({message: "Erro Interno ao Carregar a Música. ", musicas});
+    }
+  }
+
   static async getMusicaById (req, res)
   {
     const { id } = req.params;

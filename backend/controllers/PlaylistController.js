@@ -61,11 +61,11 @@ class PlaylistController
   
   static async getAllPlaylistsByUser (req, res)
   {
-    const { userId } = req.params;
+    const { id } = req.params; //userId
 
     try
     {
-        const playlists = await Playlist.findAllByUserId(userId);
+        const playlists = await Playlist.findAllByUserId(id);
         return res.status(200).json(playlists);
     }
     catch (error)

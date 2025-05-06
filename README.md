@@ -8,15 +8,11 @@
 - **Nome:** Leonardo Alexsandro de Almeida Lopes
   **RA:** 262216400
 
-### Comandos Docker
+### Comando Docker
 
-  - docker build -t mongodb-image .
-  - docker run -d -p 27017:27017 --name mongodb-container mongodb-image
+  * docker compose up -d --build
 
-// MUDAR ESSES COMANDOS DO DOCKER DPS
-
-
-SPOTIFY - Entidades 3
+### Réplica SPOTIFY - Entidades 3
 
 * USUÁRIO (Usuário normal & Autor)
 * MÚSICA (ÁUDIO)

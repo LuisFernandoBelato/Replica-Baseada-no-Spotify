@@ -44,9 +44,9 @@ class Playlist
           })
           .populate({
             path: 'musicas',
-            select: 'nome autor genero'
+            select: 'nome autor genero filePath thumbnailPath'
           });
-      }
+    }
     static async findById (id) 
     {
         return await PlaylistModel.findById(id);

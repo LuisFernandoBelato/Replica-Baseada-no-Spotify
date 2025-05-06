@@ -26,6 +26,8 @@ router.get("/get-music/:id", MusicaController.getMusicaById);
 router.put("/edit-music/:id", MusicaController.updateMusica);
 router.delete("/delete-music/:id", MusicaController.deleteMusica);
 
+router.get("/get-musics-by-user/:id", MusicaController.getAllMusicsByUser);
+
 // PLAYLIST
 
 router.post("/create-playlist", PlaylistController.createPlaylist);
@@ -34,7 +36,7 @@ router.get("/get-playlist/:id", PlaylistController.getPlaylistById);
 router.put("/edit-playlist/:id", PlaylistController.updatePlaylist);
 router.delete("/delete-playlist/:id", PlaylistController.deletePlaylist);
 
-router.get("/get-playlists-by-user", PlaylistController.getAllPlaylistsByUser);
+router.get("/get-playlists-by-user/:id", PlaylistController.getAllPlaylistsByUser);
 
 
 // PENSAR EM COMO FAZER O GET DE PLAYLIST TRAZER SÓ AS PLAYLISTS DELE - TALVEZ USAR OS PERMISSIONS
