@@ -3,6 +3,7 @@ import AuthController from "../controllers/AuthController.js";
 import UsuarioController from "../controllers/UsuarioController.js";
 import MusicaController from "../controllers/MusicaController.js";
 import PlaylistController from "../controllers/PlaylistController.js";
+import upload from "../utils/upload.js";
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ router.delete("/delete-user/:id", UsuarioController.deleteUsuario);
 
 // MÚSICAS
 
-router.post("/create-music", MusicaController.createMusica);
+router.post("/create-music", upload.single('audioFile'), MusicaController.createMusica);
 router.get("/get-musics", MusicaController.getAllMusicas);
 router.get("/get-music/:id", MusicaController.getMusicaById);
 router.put("/edit-music/:id", MusicaController.updateMusica);

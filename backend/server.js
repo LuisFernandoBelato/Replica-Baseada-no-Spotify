@@ -31,6 +31,7 @@ app.use(compressionMiddleware);
 app.use(urlencodedMiddleware);
 //app.use(morganMiddleware);
 
+app.use('/backend/uploads', express.static(path.join(__dirname, 'backend/uploads')));
 
 app.use(router);
 

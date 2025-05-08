@@ -12,6 +12,14 @@ class MusicaController
       genero
     } = req.body;
 
+    const caminho = req.file ? '/uploads/' + req.file.filename : null;
+    const caminho2 = req.file ? '/backend/uploads/' + req.file.filename : null;
+
+    console.log("REQ = ", req);
+    console.log("REQ.FILE = ", req.file);
+    console.log("caminho = ", caminho)
+    console.log("caminho2 = ", caminho2)
+
     try
     {
         const novaMusica = new Musica(nome, autorId, filePath, thumbnailPath, genero); 
