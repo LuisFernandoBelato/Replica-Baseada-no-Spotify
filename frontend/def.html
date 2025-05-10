@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicStream - Spotify Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .sidebar {
+            height: calc(100vh - 90px);
+        }
+        .main-content {
+            height: calc(100vh - 90px);
+            overflow-y: auto;
+        }
+        .card-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        .active-nav-item {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: #282828;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 50%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Top Navigation -->
+    <nav class="bg-black px-6 py-4 flex justify-between items-center border-b border-gray-800">
+        <div class="flex items-center space-x-4">
+            <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <h1 class="text-2xl font-bold text-green-500">MusicStream</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <input type="text" placeholder="Search" class="bg-gray-800 text-white px-4 py-2 rounded-full w-64 focus:outline-none">
+                <i class="fas fa-search absolute right-3 top-2.5 text-gray-400"></i>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
+                <span class="text-xs font-bold">JS</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar w-64 bg-black p-6 hidden md:block">
+            <div class="mb-8">
+                <ul>
+                    <li class="mb-2">
+                        <a href="#" onclick="showSection('home')" class="flex items-center space-x-3 text-gray-400 hover:text-white p-2 rounded active-nav-item">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" onclick="showSection('library')" class="flex items-center space-x-3 text-gray-400 hover:text-white p-2 rounded">
+                            <i class="fas fa-book"></i>
+                            <span>Your Library</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-gray-400 uppercase text-xs font-bold mb-4">Management</h3>
+                <ul>
+                    <li class="mb-2">
+                        <a href="#" onclick="showSection('users')" class="flex items-center space-x-3 text-gray-400 hover:text-white p-2 rounded">
+                            <i class="fas fa-users"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" onclick="showSection('playlists')" class="flex items-center space-x-3 text-gray-400 hover:text-white p-2 rounded">
+                            <i class="fas fa-list"></i>
+                            <span>Playlists</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" onclick="showSection('songs')" class="flex items-center space-x-3 text-gray-400 hover:text-white p-2 rounded">
+                            <i class="fas fa-music"></i>
+                            <span>Songs</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-8">
+                <button class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded-full w-full">
+                    Upgrade to Premium
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content flex-1 bg-gradient-to-b from-gray-900 to-black p-6">
+            <!-- Home Section -->
+            <div id="home-section" class="section">
+                <h2 class="text-2xl font-bold mb-6">Good afternoon</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                    <div class="bg-gray-800 bg-opacity-40 hover:bg-gray-700 p-4 rounded flex items-center card-hover cursor-pointer">
+                        <div class="w-16 h-16 bg-green-500 rounded mr-4"></div>
+                        <span class="font-bold">Liked Songs</span>
+                    </div>
+                    <!-- More playlist cards would go here -->
+                </div>
+
+                <h2 class="text-2xl font-bold mt-10 mb-6">Made For You</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                    <div class="bg-gray-800 p-4 rounded card-hover cursor-pointer">
+                        <div class="w-full aspect-square bg-gray-700 mb-4"></div>
+                        <h3 class="font-bold">Daily Mix 1</h3>
+                        <p class="text-gray-400 text-sm">Your daily mix of songs</p>
+                    </div>
+                    <!-- More recommendation cards would go here -->
+                </div>
+            </div>
+
+            <!-- Library Section -->
+            <div id="library-section" class="section hidden">
+                <h2 class="text-2xl font-bold mb-6">Your Library</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                    <div class="bg-gray-800 p-4 rounded card-hover cursor-pointer">
+                        <div class="w-full aspect-square bg-gray-700 mb-4"></div>
+                        <h3 class="font-bold">Workout Mix</h3>
+                        <p class="text-gray-400 text-sm">Playlist • 50 songs</p>
+                    </div>
+                    <!-- More library items would go here -->
+                </div>
+            </div>
+
+            <!-- Users CRUD Section -->
+            <div id="users-section" class="section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Users Management</h2>
+                    <button onclick="openModal('user')" class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+                        Add New User
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="border-b border-gray-800">
+                            <tr>
+                                <th class="pb-2">ID</th>
+                                <th class="pb-2">Name</th>
+                                <th class="pb-2">Email</th>
+                                <th class="pb-2">Type</th>
+                                <th class="pb-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Users will be populated here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Playlists CRUD Section -->
+            <div id="playlists-section" class="section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Playlists Management</h2>
+                    <button onclick="openModal('playlist')" class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+                        Add New Playlist
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="border-b border-gray-800">
+                            <tr>
+                                <th class="pb-2">ID</th>
+                                <th class="pb-2">Name</th>
+                                <th class="pb-2">Description</th>
+                                <th class="pb-2">Owner</th>
+                                <th class="pb-2">Songs</th>
+                                <th class="pb-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="playlists-table-body">
+                            <!-- Playlists will be populated here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Songs CRUD Section -->
+            <div id="songs-section" class="section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Songs Management</h2>
+                    <button onclick="openModal('song')" class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+                        Add New Song
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="border-b border-gray-800">
+                            <tr>
+                                <th class="pb-2">ID</th>
+                                <th class="pb-2">Title</th>
+                                <th class="pb-2">Artist</th>
+                                <th class="pb-2">Album</th>
+                                <th class="pb-2">Duration</th>
+                                <th class="pb-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="songs-table-body">
+                            <!-- Songs will be populated here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 px-4 py-2 flex items-center justify-between">
+        <div class="flex items-center w-1/4">
+            <div class="w-12 h-12 bg-gray-700 mr-3"></div>
+            <div>
+                <p class="font-bold text-sm">Song Title</p>
+                <p class="text-gray-400 text-xs">Artist Name</p>
+            </div>
+            <button class="ml-4 text-gray-400 hover:text-white">
+                <i class="far fa-heart"></i>
+            </button>
+        </div>
+
+        <div class="w-2/4">
+            <div class="flex justify-center items-center space-x-4 mb-1">
+                <button class="text-gray-400 hover:text-white">
+                    <i class="fas fa-random"></i>
+                </button>
+                <button class="text-gray-400 hover:text-white">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center hover:scale-105">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="text-gray-400 hover:text-white">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button class="text-gray-400 hover:text-white">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="text-xs text-gray-400">0:00</span>
+                <div class="flex-1 h-1 bg-gray-700 rounded-full">
+                    <div class="h-1 bg-green-500 rounded-full w-1/4"></div>
+                </div>
+                <span class="text-xs text-gray-400">3:45</span>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-end w-1/4 space-x-3">
+            <button class="text-gray-400 hover:text-white">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="text-gray-400 hover:text-white">
+                <i class="fas fa-laptop"></i>
+            </button>
+            <button class="text-gray-400 hover:text-white">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <div class="w-20 h-1 bg-gray-700 rounded-full">
+                <div class="h-1 bg-green-500 rounded-full w-3/4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close float-right text-2xl cursor-pointer" onclick="closeModal('user')">&times;</span>
+            <h2 class="text-xl font-bold mb-4" id="user-modal-title">Add New User</h2>
+            <form id="user-form">
+                <input type="hidden" id="user-id">
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Name</label>
+                    <input type="text" id="user-name" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Email</label>
+                    <input type="email" id="user-email" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Type</label>
+                    <select id="user-type" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                        <option value="free">Free</option>
+                        <option value="premium">Premium</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closeModal('user')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="saveUser()" class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="playlist-modal" class="modal">
+        <div class="modal-content">
+            <span class="close float-right text-2xl cursor-pointer" onclick="closeModal('playlist')">&times;</span>
+            <h2 class="text-xl font-bold mb-4" id="playlist-modal-title">Add New Playlist</h2>
+            <form id="playlist-form">
+                <input type="hidden" id="playlist-id">
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Name</label>
+                    <input type="text" id="playlist-name" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Description</label>
+                    <textarea id="playlist-description" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Owner</label>
+                    <select id="playlist-owner" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                        <!-- Users will be populated here -->
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closeModal('playlist')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="savePlaylist()" class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="song-modal" class="modal">
+        <div class="modal-content">
+            <span class="close float-right text-2xl cursor-pointer" onclick="closeModal('song')">&times;</span>
+            <h2 class="text-xl font-bold mb-4" id="song-modal-title">Add New Song</h2>
+            <form id="song-form">
+                <input type="hidden" id="song-id">
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Title</label>
+                    <input type="text" id="song-title" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Artist</label>
+                    <input type="text" id="song-artist" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Album</label>
+                    <input type="text" id="song-album" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 mb-2">Duration (seconds)</label>
+                    <input type="number" id="song-duration" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500">
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closeModal('song')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="saveSong()" class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample data
+        let users = [
+            { id: 1, name: 'John Doe', email: 'john@example.com', type: 'premium' },
+            { id: 2, name: 'Jane Smith', email: 'jane@example.com', type: 'free' },
+            { id: 3, name: 'Admin User', email: 'admin@example.com', type: 'admin' }
+        ];
+
+        let playlists = [
+            { id: 1, name: 'Workout Mix', description: 'High energy songs for workouts', ownerId: 1, songCount: 12 },
+            { id: 2, name: 'Chill Vibes', description: 'Relaxing music for downtime', ownerId: 2, songCount: 8 }
+        ];
+
+        let songs = [
+            { id: 1, title: 'Blinding Lights', artist: 'The Weeknd', album: 'After Hours', duration: 203 },
+            { id: 2, title: 'Save Your Tears', artist: 'The Weeknd', album: 'After Hours', duration: 215 },
+            { id: 3, title: 'Levitating', artist: 'Dua Lipa', album: 'Future Nostalgia', duration: 218 }
+        ];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+            renderUsersTable();
+            renderPlaylistsTable();
+            renderSongsTable();
+        });
+
+        // Section navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the selected section
+            document.getElementById(`${sectionId}-section`).classList.remove('hidden');
+
+            // Update active nav item
+            document.querySelectorAll('#sidebar a').forEach(link => {
+                link.classList.remove('active-nav-item');
+            });
+            
+            const activeLink = document.querySelector(`#sidebar a[onclick="showSection('${sectionId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active-nav-item');
+            }
+        }
+
+        // Toggle sidebar on mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+
+        // Modal functions
+        function openModal(type) {
+            document.getElementById(`${type}-modal`).style.display = 'block';
+            document.getElementById(`${type}-modal-title`).textContent = `Add New ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            document.getElementById(`${type}-id`).value = '';
+            
+            // Clear form
+            const form = document.getElementById(`${type}-form`);
+            if (form) {
+                form.reset();
+            }
+            
+            // Special handling for playlist owner dropdown
+            if (type === 'playlist') {
+                const ownerSelect = document.getElementById('playlist-owner');
+                ownerSelect.innerHTML = '';
+                users.forEach(user => {
+                    const option = document.createElement('option');
+                    option.value = user.id;
+                    option.textContent = user.name;
+                    ownerSelect.appendChild(option);
+                });
+            }
+        }
+
+        function closeModal(type) {
+            document.getElementById(`${type}-modal`).style.display = 'none';
+        }
+
+        // CRUD operations for Users
+        function renderUsersTable() {
+            const tbody = document.getElementById('users-table-body');
+            tbody.innerHTML = '';
+            
+            users.forEach(user => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-800 hover:bg-gray-800';
+                tr.innerHTML = `
+                    <td class="py-3">${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.type}</td>
+                    <td class="py-3">
+                        <button onclick="editUser(${user.id})" class="text-blue-400 hover:text-blue-300 mr-2">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="deleteUser(${user.id})" class="text-red-400 hover:text-red-300">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function editUser(id) {
+            const user = users.find(u => u.id === id);
+            if (user) {
+                document.getElementById('user-modal-title').textContent = 'Edit User';
+                document.getElementById('user-id').value = user.id;
+                document.getElementById('user-name').value = user.name;
+                document.getElementById('user-email').value = user.email;
+                document.getElementById('user-type').value = user.type;
+                document.getElementById('user-modal').style.display = 'block';
+            }
+        }
+
+        function saveUser() {
+            const id = document.getElementById('user-id').value;
+            const name = document.getElementById('user-name').value;
+            const email = document.getElementById('user-email').value;
+            const type = document.getElementById('user-type').value;
+            
+            if (!name || !email) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (id) {
+                // Update existing user
+                const index = users.findIndex(u => u.id === parseInt(id));
+                if (index !== -1) {
+                    users[index] = { id: parseInt(id), name, email, type };
+                }
+            } else {
+                // Add new user
+                const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+                users.push({ id: newId, name, email, type });
+            }
+            
+            renderUsersTable();
+            closeModal('user');
+        }
+
+        function deleteUser(id) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                users = users.filter(u => u.id !== id);
+                renderUsersTable();
+            }
+        }
+
+        // CRUD operations for Playlists
+        function renderPlaylistsTable() {
+            const tbody = document.getElementById('playlists-table-body');
+            tbody.innerHTML = '';
+            
+            playlists.forEach(playlist => {
+                const owner = users.find(u => u.id === playlist.ownerId);
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-800 hover:bg-gray-800';
+                tr.innerHTML = `
+                    <td class="py-3">${playlist.id}</td>
+                    <td>${playlist.name}</td>
+                    <td>${playlist.description}</td>
+                    <td>${owner ? owner.name : 'Unknown'}</td>
+                    <td>${playlist.songCount}</td>
+                    <td class="py-3">
+                        <button onclick="editPlaylist(${playlist.id})" class="text-blue-400 hover:text-blue-300 mr-2">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="deletePlaylist(${playlist.id})" class="text-red-400 hover:text-red-300">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function editPlaylist(id) {
+            const playlist = playlists.find(p => p.id === id);
+            if (playlist) {
+                document.getElementById('playlist-modal-title').textContent = 'Edit Playlist';
+                document.getElementById('playlist-id').value = playlist.id;
+                document.getElementById('playlist-name').value = playlist.name;
+                document.getElementById('playlist-description').value = playlist.description;
+                document.getElementById('playlist-owner').value = playlist.ownerId;
+                
+                // Populate owner dropdown
+                const ownerSelect = document.getElementById('playlist-owner');
+                ownerSelect.innerHTML = '';
+                users.forEach(user => {
+                    const option = document.createElement('option');
+                    option.value = user.id;
+                    option.textContent = user.name;
+                    ownerSelect.appendChild(option);
+                });
+                ownerSelect.value = playlist.ownerId;
+                
+                document.getElementById('playlist-modal').style.display = 'block';
+            }
+        }
+
+        function savePlaylist() {
+            const id = document.getElementById('playlist-id').value;
+            const name = document.getElementById('playlist-name').value;
+            const description = document.getElementById('playlist-description').value;
+            const ownerId = parseInt(document.getElementById('playlist-owner').value);
+            
+            if (!name || !ownerId) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (id) {
+                // Update existing playlist
+                const index = playlists.findIndex(p => p.id === parseInt(id));
+                if (index !== -1) {
+                    playlists[index] = { 
+                        id: parseInt(id), 
+                        name, 
+                        description, 
+                        ownerId,
+                        songCount: playlists[index].songCount 
+                    };
+                }
+            } else {
+                // Add new playlist
+                const newId = playlists.length > 0 ? Math.max(...playlists.map(p => p.id)) + 1 : 1;
+                playlists.push({ 
+                    id: newId, 
+                    name, 
+                    description, 
+                    ownerId,
+                    songCount: 0 
+                });
+            }
+            
+            renderPlaylistsTable();
+            closeModal('playlist');
+        }
+
+        function deletePlaylist(id) {
+            if (confirm('Are you sure you want to delete this playlist?')) {
+                playlists = playlists.filter(p => p.id !== id);
+                renderPlaylistsTable();
+            }
+        }
+
+        // CRUD operations for Songs
+        function renderSongsTable() {
+            const tbody = document.getElementById('songs-table-body');
+            tbody.innerHTML = '';
+            
+            songs.forEach(song => {
+                const duration = formatDuration(song.duration);
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-800 hover:bg-gray-800';
+                tr.innerHTML = `
+                    <td class="py-3">${song.id}</td>
+                    <td>${song.title}</td>
+                    <td>${song.artist}</td>
+                    <td>${song.album}</td>
+                    <td>${duration}</td>
+                    <td class="py-3">
+                        <button onclick="editSong(${song.id})" class="text-blue-400 hover:text-blue-300 mr-2">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="deleteSong(${song.id})" class="text-red-400 hover:text-red-300">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function formatDuration(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+        }
+
+        function editSong(id) {
+            const song = songs.find(s => s.id === id);
+            if (song) {
+                document.getElementById('song-modal-title').textContent = 'Edit Song';
+                document.getElementById('song-id').value = song.id;
+                document.getElementById('song-title').value = song.title;
+                document.getElementById('song-artist').value = song.artist;
+                document.getElementById('song-album').value = song.album;
+                document.getElementById('song-duration').value = song.duration;
+                document.getElementById('song-modal').style.display = 'block';
+            }
+        }
+
+        function saveSong() {
+            const id = document.getElementById('song-id').value;
+            const title = document.getElementById('song-title').value;
+            const artist = document.getElementById('song-artist').value;
+            const album = document.getElementById('song-album').value;
+            const duration = parseInt(document.getElementById('song-duration').value);
+            
+            if (!title || !artist || !duration) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (id) {
+                // Update existing song
+                const index = songs.findIndex(s => s.id === parseInt(id));
+                if (index !== -1) {
+                    songs[index] = { 
+                        id: parseInt(id), 
+                        title, 
+                        artist, 
+                        album, 
+                        duration 
+                    };
+                }
+            } else {
+                // Add new song
+                const newId = songs.length > 0 ? Math.max(...songs.map(s => s.id)) + 1 : 1;
+                songs.push({ 
+                    id: newId, 
+                    title, 
+                    artist, 
+                    album, 
+                    duration 
+                });
+            }
+            
+            renderSongsTable();
+            closeModal('song');
+        }
+
+        function deleteSong(id) {
+            if (confirm('Are you sure you want to delete this song?')) {
+                songs = songs.filter(s => s.id !== id);
+                renderSongsTable();
+            }
+        }
+    </script>
+</body>
+</html>
