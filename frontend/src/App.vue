@@ -8,8 +8,9 @@
         <router-view />
       </div>
     </div>
+    <PlayerBarComponent />
   </div>
-  <PlayerBarComponent />
+  
 
 
 

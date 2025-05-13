@@ -16,7 +16,6 @@
               <th class="pb-2">ID</th>
               <th class="pb-2">Name</th>
               <th class="pb-2">Email</th>
-              <th class="pb-2">Type</th>
               <th class="pb-2">Actions</th>
             </tr>
           </thead>
@@ -25,9 +24,8 @@
               <td class="py-3">1</td>
               <td>leo</td>
               <td>leo</td>
-              <td>leo</td>
               <td class="py-3">
-                <button class="text-blue-400 hover:text-blue-300 mr-2">
+                <button class="text-blue-400 hover:text-blue-300 mr-2" @click="showUserModal = true">
                   <i class="fas fa-edit"></i>
                 </button>
                 <button class="text-red-400 hover:text-red-300">
@@ -71,17 +69,14 @@
                 class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500"
               />
             </div>
-  
-            <div class="mb-4">
-              <label class="block text-gray-400 mb-2">Type</label>
-              <select
-                id="user-type"
+
+              <div class="mb-4">
+              <label class="block text-gray-400 mb-2">Password</label>
+              <input
+                type="password"
+                id="user-password"
                 class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500"
-              >
-                <option value="free">Free</option>
-                <option value="premium">Premium</option>
-                <option value="admin">Admin</option>
-              </select>
+              />
             </div>
   
             <div class="flex justify-end space-x-3">

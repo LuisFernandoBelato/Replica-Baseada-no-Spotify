@@ -30,7 +30,7 @@
               <td>John Doe</td>
               <td>12</td>
               <td class="py-3">
-                <button class="text-blue-400 hover:text-blue-300 mr-2">
+                <button class="text-blue-400 hover:text-blue-300 mr-2" @click="showPlaylistModal = true">
                   <i class="fas fa-edit"></i>
                 </button>
                 <button class="text-red-400 hover:text-red-300">
@@ -77,9 +77,9 @@
             </div>
   
             <div class="mb-4">
-              <label class="block text-gray-400 mb-2">Owner</label>
+              <label class="block text-gray-400 mb-2">Musics</label>
               <select
-                id="playlist-owner"
+                id="playlist-musics"
                 class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500"
               >
 
