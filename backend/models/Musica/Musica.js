@@ -27,11 +27,19 @@ class Musica
     }
     static async findAll () 
     {
-        return await MusicaModel.find();
+        return await MusicaModel.find()
+        .populate({
+            path: 'autor',
+            select: 'nome email'
+        });
     }
     static async findById (id) 
     {
-        return await MusicaModel.findById(id);
+        return await MusicaModel.findById(id)
+        .populate({
+            path: 'autor',
+            select: 'nome email'
+        });
     }
     static async findAllByUserId(userId) 
     {

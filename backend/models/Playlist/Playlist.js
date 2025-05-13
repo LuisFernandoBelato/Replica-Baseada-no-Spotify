@@ -27,7 +27,11 @@ class Playlist
     }
     static async findAll () 
     {
-        return await PlaylistModel.find();
+        return await PlaylistModel.find()
+        .populate({
+            path: 'dono',
+            select: 'nome email'
+        });
     }
     static async findAllByUserId(userId) 
     {
@@ -49,7 +53,11 @@ class Playlist
     }
     static async findById (id) 
     {
-        return await PlaylistModel.findById(id);
+        return await PlaylistModel.findById(id)
+        .populate({
+            path: 'dono',
+            select: 'nome email'
+        });
     }
     static async update (id, data)
     {
