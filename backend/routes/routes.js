@@ -21,29 +21,41 @@ router.delete("/delete-user/:id", UsuarioController.deleteUsuario);
 
 // MÚSICAS
 
-router.post("/create-music", upload.single('audioFile'), MusicaController.createMusica);
+router.post("/create-music", upload.fields([
+  { name: 'audioFile', maxCount: 1 },
+  { name: 'thumbnailFile', maxCount: 1 }
+]), MusicaController.createMusica);
+
 router.get("/get-musics", MusicaController.getAllMusicas);
 router.get("/get-music/:id", MusicaController.getMusicaById);
-router.put("/edit-music/:id", MusicaController.updateMusica);
+
+router.put("/edit-music/:id", upload.fields([
+  { name: 'audioFile', maxCount: 1 },
+  { name: 'thumbnailFile', maxCount: 1 }
+]), MusicaController.updateMusica);
+
 router.delete("/delete-music/:id", MusicaController.deleteMusica);
 
 router.get("/get-musics-by-user/:id", MusicaController.getAllMusicsByUser);
 
 // PLAYLIST
 
-router.post("/create-playlist", PlaylistController.createPlaylist);
+router.post("/create-playlist", upload.fields([
+  { name: 'thumbnailFile', maxCount: 1 }
+]), PlaylistController.createPlaylist);
+
 router.get("/get-playlists", PlaylistController.getAllPlaylists);
 router.get("/get-playlist/:id", PlaylistController.getPlaylistById);
-router.put("/edit-playlist/:id", PlaylistController.updatePlaylist);
+
+router.put("/edit-playlist/:id", upload.fields([
+  { name: 'thumbnailFile', maxCount: 1 }
+]), PlaylistController.updatePlaylist);
+
 router.delete("/delete-playlist/:id", PlaylistController.deletePlaylist);
 
 router.get("/get-playlists-by-user/:id", PlaylistController.getAllPlaylistsByUser);
 
 
-// PENSAR EM COMO FAZER O GET DE PLAYLIST TRAZER SÓ AS PLAYLISTS DELE - TALVEZ USAR OS PERMISSIONS
-// PENSAR EM COMO FAZER O GET DE MÚSICAS TRAZER SÓ AS MÚSICAS DELE (PRO USUÁRIO ATUALIZAR E DELETAR SÓ AS DELE, O RESTO É PÚBLICO)
-
-    // - O PROBLEMA AQUI É QUE VINDO DO FRONT, AINDA NÃO SABEMOS QUAL USUÁRIO QUE ESTÁ FAZENDO A REQUISIÇÃO
-
+// TRAZER NOME DO DONO NO GET DE MÚSICAS E GET DE PLAYLIST
     
 export default router;

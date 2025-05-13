@@ -10,7 +10,7 @@ networks:
 services:
   database:
     container_name: MongoDB
-    image: mongo:latest
+    image: mongo:7.0-jammy # ou bitnami/mongodb:7.0
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: g59V14ZIRvvIiue8

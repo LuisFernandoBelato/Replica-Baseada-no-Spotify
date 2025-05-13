@@ -9,13 +9,14 @@ class PlaylistController
       descricao,
       donoId, 
       musicasIdsArray, // Array de Ids das Músicas
-      permission,
-      thumbnailPath
+      permission
     } = req.body;
+
+    const thumbnailPath = req.files?.thumbnailFile?.[0]?.filename ? '/backend/uploads/' + req.files?.thumbnailFile[0].filename : null;
 
     try
     {
-        const novaPlaylist = new Playlist(nome, descricao, donoId, musicasIdsArray, permission, thumbnailPath); 
+        const novaPlaylist = new Playlist(nome, descricao, donoId, JSON.parse(musicasIdsArray), permission, thumbnailPath); 
         await novaPlaylist.save();
         return res.status(201).json(novaPlaylist);
     }
@@ -78,8 +79,27 @@ class PlaylistController
   static async updatePlaylist (req, res)
   {
     const { id } = req.params;
-    const newPlaylist = req.body;
 
+    const {
+      nome, 
+      descricao,
+      donoId, 
+      musicasIdsArray, // Array de Ids das Músicas
+      permission
+    } = req.body;
+
+    const thumbnailPath = req.files?.thumbnailFile?.[0]?.filename ? '/backend/uploads/' + req.files?.thumbnailFile[0].filename : null;
+
+    let newPlaylist = {
+      nome,
+      descricao,
+      donoId,
+      musicasIdsArray: JSON.parse(musicasIdsArray),
+      thumbnailPath,
+      permission
+    }
+    //console.log("newPlaylist = ", newPlaylist)
+    
     try
     {
         if (await Playlist.update(id, newPlaylist))

@@ -7,22 +7,16 @@ class MusicaController
     const { 
       nome, 
       autorId, 
-      filePath,
-      thumbnailPath,
-      genero
+      genero,
+      artist
     } = req.body;
 
-    const caminho = req.file ? '/uploads/' + req.file.filename : null;
-    const caminho2 = req.file ? '/backend/uploads/' + req.file.filename : null;
-
-    console.log("REQ = ", req);
-    console.log("REQ.FILE = ", req.file);
-    console.log("caminho = ", caminho)
-    console.log("caminho2 = ", caminho2)
+    const filePath = req.files?.audioFile?.[0]?.filename ? '/backend/uploads/' + req.files?.audioFile[0].filename : null;
+    const thumbnailPath = req.files?.thumbnailFile?.[0]?.filename ? '/backend/uploads/' + req.files?.thumbnailFile[0].filename : null;
 
     try
     {
-        const novaMusica = new Musica(nome, autorId, filePath, thumbnailPath, genero); 
+        const novaMusica = new Musica(nome, autorId, filePath, thumbnailPath, genero, artist); 
         await novaMusica.save();
         return res.status(201).json(novaMusica);
     }
@@ -90,7 +84,26 @@ class MusicaController
   static async updateMusica (req, res)
   {
     const { id } = req.params;
-    const newMusica = req.body;
+
+    const {
+      nome, 
+      autorId, 
+      genero,
+      artist
+    } = req.body;
+
+    const filePath = req.files?.audioFile?.[0]?.filename ? '/backend/uploads/' + req.files?.audioFile[0].filename : null;
+    const thumbnailPath = req.files?.thumbnailFile?.[0]?.filename ? '/backend/uploads/' + req.files?.thumbnailFile[0].filename : null;    
+
+    let newMusica = {
+      nome, 
+      autorId, 
+      genero,
+      artist,
+      filePath,
+      thumbnailPath
+    };
+    console.log("newMusica = ", newMusica)
 
     try
     {
