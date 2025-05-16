@@ -7,16 +7,21 @@ class UsuarioController
     const { 
       nome, 
       email, 
-      senha
+      senha,
+      logradouro,
+      bairro,
+      estado,
+      cep
     } = req.body;
 
     const usuarioExiste = await Usuario.findByEmail(email);
-    if (usuarioExiste == [])
+  
+    if (usuarioExiste.length > 0)
         return res.status(400).json({message: "Já existe um Usuário com esse Email."});
 
     try
     {
-        const novoUsuario = new Usuario(nome, email, senha); 
+        const novoUsuario = new Usuario(nome, email, senha, logradouro, bairro, estado, cep); 
         await novoUsuario.save();
         return res.status(201).json(novoUsuario);
     }

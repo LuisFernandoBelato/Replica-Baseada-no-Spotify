@@ -30,7 +30,7 @@ class Playlist
         return await PlaylistModel.find()
         .populate({
             path: 'dono',
-            select: 'nome email'
+            select: 'nome email logradouro bairro estado cep'
         });
     }
     static async findAllByUserId(userId) 
@@ -44,7 +44,7 @@ class Playlist
         return await PlaylistModel.find({ dono: userId })
           .populate({
             path: 'dono',
-            select: 'nome email'
+            select: 'nome email logradouro bairro estado cep'
           })
           .populate({
             path: 'musicas',
@@ -56,7 +56,7 @@ class Playlist
         return await PlaylistModel.findById(id)
         .populate({
             path: 'dono',
-            select: 'nome email'
+            select: 'nome email logradouro bairro estado cep'
         });
     }
     static async update (id, data)

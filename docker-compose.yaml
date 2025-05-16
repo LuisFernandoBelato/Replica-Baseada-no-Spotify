@@ -24,6 +24,7 @@ services:
 
   express-server:
     container_name: Express-Back-End
+    image: express-server:dev
     build:
       context: .
       dockerfile: Dockerfile-back
@@ -38,6 +39,7 @@ services:
 
   application:
     container_name: Vue-Front-End
+    image: vue-frontend:dev
     build:
       context: .
       dockerfile: Dockerfile-front

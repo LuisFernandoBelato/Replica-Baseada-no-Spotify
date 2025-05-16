@@ -30,7 +30,7 @@ class Musica
         return await MusicaModel.find()
         .populate({
             path: 'autor',
-            select: 'nome email'
+            select: 'nome email logradouro bairro estado cep'
         });
     }
     static async findById (id) 
@@ -38,7 +38,7 @@ class Musica
         return await MusicaModel.findById(id)
         .populate({
             path: 'autor',
-            select: 'nome email'
+            select: 'nome email logradouro bairro estado cep'
         });
     }
     static async findAllByUserId(userId) 
@@ -53,7 +53,7 @@ class Musica
         return await MusicaModel.find({ autor: userId })
           .populate({
             path: 'autor',
-            select: 'nome email'
+            select: 'nome email logradouro bairro estado cep'
           });
     }
     static async update (id, data)

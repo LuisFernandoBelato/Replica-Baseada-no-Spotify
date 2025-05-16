@@ -1,0 +1,568 @@
+{
+	"info": {
+		"_postman_id": "bf53b167-20a5-47a5-9de7-837e054b32bb",
+		"name": "Spotify - Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35092627"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Create-User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Joca Silva\",\r\n    \"email\": \"jocasilvaaa@gmail.com\",\r\n    \"senha\": \"joca123\",\r\n    \"logradouro\": \"a\",\r\n    \"bairro\": \"a\",\r\n    \"estado\": \"sp\",\r\n    \"cep\": \"19160-300\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/create-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll-Users",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/get-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-User-By-Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/get-user/682252640f7bdcf730eaad54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get-user",
+								"682252640f7bdcf730eaad54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit-User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Joca Silva\",\r\n    \"email\": \"jocasilaaaaavaaa@gmail.com\",\r\n    \"senha\": \"joca123\",\r\n    \"logradouro\": \"adwa\",\r\n    \"bairro\": \"adwa\",\r\n    \"estado\": \"sdawp\",\r\n    \"cep\": \"191dwad60-300\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/edit-user/68279a030cd2b5043efd0ebe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"edit-user",
+								"68279a030cd2b5043efd0ebe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete-User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/delete-user/682799950cd2b5043efd0eb7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"delete-user",
+								"682799950cd2b5043efd0eb7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Musicas",
+			"item": [
+				{
+					"name": "Create-Music",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": "Livin on love 2",
+									"type": "default"
+								},
+								{
+									"key": "autorId",
+									"value": "682252640f7bdcf730eaad54",
+									"type": "default"
+								},
+								{
+									"key": "genero",
+									"value": "Country",
+									"type": "default"
+								},
+								{
+									"key": "audioFile",
+									"type": "file",
+									"src": "/C:/Users/pedro/Pictures/Turquoise Green Wallpaper2.jpg"
+								},
+								{
+									"key": "thumbnailFile",
+									"type": "file",
+									"src": "/C:/Users/pedro/Pictures/Turquoise Green Wallpaper2.jpg"
+								},
+								{
+									"key": "artist",
+									"value": "Alan Jackson",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/create-music",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"create-music"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll-Musics",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/get-musics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get-musics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Music-By-Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/get-music/68226edce214df822c7b5e7b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get-music",
+								"68226edce214df822c7b5e7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Musics-By-UserId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/get-musics-by-user/682252640f7bdcf730eaad54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get-musics-by-user",
+								"682252640f7bdcf730eaad54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit-Music",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": "Edit Living on love 2",
+									"type": "default"
+								},
+								{
+									"key": "autorId",
+									"value": "682252640f7bdcf730eaad54",
+									"type": "default"
+								},
+								{
+									"key": "genero",
+									"value": "CountryZaum",
+									"type": "default"
+								},
+								{
+									"key": "artist",
+									"value": "Alan Jakison mermao",
+									"type": "default"
+								},
+								{
+									"key": "audioFile",
+									"type": "file",
+									"src": "/C:/Users/pedro/Pictures/Turquoise Green Wallpaper2 High Resolution.jpg"
+								},
+								{
+									"key": "thumbnailFile",
+									"type": "file",
+									"src": "/C:/Users/pedro/Pictures/Turquoise Green Wallpaper2 High Resolution.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/edit-music/68226edce214df822c7b5e7b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"edit-music",
+								"68226edce214df822c7b5e7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete-Music",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/delete-music/6822989581557dba7e2ada08",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"delete-music",
+								"6822989581557dba7e2ada08"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlists",
+			"item": [
+				{
+					"name": "Create-Playlist",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": "MUSICAO 2",
+									"type": "default"
+								},
+								{
+									"key": "descricao",
+									"value": "Musicao do Baum",
+									"type": "default"
+								},
+								{
+									"key": "donoId",
+									"value": "682252640f7bdcf730eaad54",
+									"type": "default"
+								},
+								{
+									"key": "musicasIdsArray",
+									"value": "[]",
+									"type": "default"
+								},
+								{
+									"key": "permission",
+									"value": "PUBLIC",
+									"type": "default"
+								},
+								{
+									"key": "thumbnailFile",
+									"type": "file",
+									"src": "/C:/Users/pedro/Pictures/Turquoise Green Wallpaper High Resolution.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/create-playlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"create-playlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll-Playlists",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/get-playlists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get-playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Playlist-By-Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/get-playlist/682795f70cd2b5043efd0eac",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get-playlist",
+								"682795f70cd2b5043efd0eac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Playlists-By-UserId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/get-playlists-by-user/682252640f7bdcf730eaad54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get-playlists-by-user",
+								"682252640f7bdcf730eaad54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit-Playlist",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": "MUSICAO 3",
+									"type": "default"
+								},
+								{
+									"key": "descricao",
+									"value": "Musicao Massa",
+									"type": "default"
+								},
+								{
+									"key": "donoId",
+									"value": "682252640f7bdcf730eaad54",
+									"type": "default"
+								},
+								{
+									"key": "musicasIdsArray",
+									"value": "[]",
+									"type": "default"
+								},
+								{
+									"key": "permission",
+									"value": "PUBLIC",
+									"type": "default"
+								},
+								{
+									"key": "thumbnailFile",
+									"type": "file",
+									"src": "/C:/Users/pedro/Pictures/Turquoise Green Wallpaper2 High Resolution.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/edit-playlist/682795f70cd2b5043efd0eac",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"edit-playlist",
+								"682795f70cd2b5043efd0eac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete-Playlist",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/delete-playlist/682795f70cd2b5043efd0eac",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"delete-playlist",
+								"682795f70cd2b5043efd0eac"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

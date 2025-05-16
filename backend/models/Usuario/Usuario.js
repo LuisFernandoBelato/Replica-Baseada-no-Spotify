@@ -2,11 +2,15 @@ import UsuarioModel from "./UsuarioSchema.js";
 
 class Usuario
 {
-    constructor (nome, email, senha)
+    constructor(nome, email, senha, logradouro, bairro, estado, cep) 
     {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.estado = estado;
+        this.cep = cep;
     }
 
     async save () 
@@ -14,7 +18,11 @@ class Usuario
         const novoUsuario = new UsuarioModel({
             nome: this.nome,
             email: this.email,
-            senha: this.senha
+            senha: this.senha,
+            logradouro: this.logradouro,
+            bairro: this.bairro,
+            estado: this.estado,
+            cep: this.cep
         });
 
         return await novoUsuario.save();
