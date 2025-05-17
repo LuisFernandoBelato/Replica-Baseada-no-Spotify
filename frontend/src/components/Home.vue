@@ -1,28 +1,72 @@
 <template>
     <div id="home-section" class="section">
-        <h2 class="text-2xl font-bold mb-6">Good afternoon</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-            <div class="bg-gray-800 bg-opacity-40 hover:bg-gray-700 p-4 rounded flex items-center card-hover cursor-pointer">
-                <div class="w-16 h-16 bg-green-500 rounded mr-4"></div>
-                <span class="font-bold">Liked Songs</span>
-            </div>
-            <!-- More playlist cards would go here -->
+      <h2 class="text-2xl font-bold mb-6">Good afternoon</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+        
+      </div>
+  
+      <h2 class="text-2xl font-bold mt-10 mb-6">Musics</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        <div
+          v-for="music in musics"
+          :key="music._id"
+          class="bg-gray-800 p-4 rounded card-hover cursor-pointer"
+          @click="playMusic(music)"
+        >
+          <div class="w-full aspect-square mb-4 overflow-hidden rounded" style="background:rgba(55,65,81,0.5)">
+            <img
+            v-if="music.thumbnailPath"
+            :src="`http://localhost:8000${music.thumbnailPath}`"
+            alt="thumbnail"
+            class="w-full h-full object-cover"
+            style="filter:brightness(1.2);"
+            />
+            <div v-else class="w-full h-full bg-gray-600"></div>
+          </div>
+          <h3 class="font-bold text-white">{{ music.nome }}</h3>
+          <p class="text-gray-400 text-sm">{{ music.autor.nome }}</p>
         </div>
-
-        <h2 class="text-2xl font-bold mt-10 mb-6">Made For You</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-            <div class="bg-gray-800 p-4 rounded card-hover cursor-pointer">
-                <div class="w-full aspect-square bg-gray-700 mb-4"></div>
-                <h3 class="font-bold">Daily Mix 1</h3>
-                <p class="text-gray-400 text-sm">Your daily mix of songs</p>
-            </div>
-            <!-- More recommendation cards would go here -->
-        </div>
+      </div>
+  
+      <!-- Player Bar aparece só quando currentMusic estiver definido -->
+      <PlayerBarComponent
+        v-if="currentMusic"
+        :track="currentMusic"
+        @close="currentMusic = null"
+      />
     </div>
-</template>
-
-<script>
-export default {
-  name: "HomeComponent",
-};
-</script>
+  </template>
+  
+  <script>
+  import axiosInstance from "@/services/axiosInstance";
+  import PlayerBarComponent from "@/components/PlayerBar.vue";
+  
+  export default {
+    name: "HomeComponent",
+    components: { PlayerBarComponent },
+    data() {
+      return {
+        musics: [],
+        currentMusic: null,
+      };
+    },
+    mounted() {
+      this.fetchMusics();
+    },
+    methods: {
+      async fetchMusics() {
+        try {
+          const { data } = await axiosInstance.get("/get-musics");
+          this.musics = data;
+        } catch (err) {
+          console.error("Erro ao buscar musics:", err);
+        }
+      },
+      playMusic(music) {
+        // define a música corrente e o PlayerBarComponent irá lidar com o áudio
+        this.currentMusic = music;
+      },
+    },
+  };
+  </script>
+  
