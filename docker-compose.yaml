@@ -37,13 +37,13 @@ services:
     env_file: 
       - ./backend/.env
 
-  #application:
-   # container_name: Vue-Front-End
-    #image: vue-frontend:dev
-    #build:
-     # context: .
-      #dockerfile: Dockerfile-front
-    #ports:
-     # - 3000:3000
-    #networks:
-     # - app_net
+  application:
+    container_name: Vue-Front-End
+    image: vue-frontend:dev
+    build:
+     context: .
+     dockerfile: Dockerfile-front
+    ports:
+     - 3000:3000
+    networks:
+     - app_net
