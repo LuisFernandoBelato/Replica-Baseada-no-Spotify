@@ -58,7 +58,7 @@ const router = createRouter({
   routes
 })
 
-// Proteção de rotas
+
 router.beforeEach((to, from, next) => {
   const loggedUser = localStorage.getItem('loggedUser')
   let isAuthenticated = false
@@ -66,7 +66,6 @@ router.beforeEach((to, from, next) => {
   try {
     const parsedUser = JSON.parse(loggedUser)
 
-    // Verifica se o objeto é válido e não está vazio
     if (parsedUser && Object.keys(parsedUser).length > 0) {
       isAuthenticated = true
     }
