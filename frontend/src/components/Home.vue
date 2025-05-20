@@ -6,6 +6,7 @@
           v-for="playlist in playlists"
           :key="playlist._id"
           class="bg-gray-800 p-4 rounded card-hover cursor-pointer"
+           @click="goToPlaylist(playlist._id)"
         >
         {{ console.log("playlist", playlist) }}
           <div class="w-full aspect-square mb-4 overflow-hidden rounded" style="background:rgba(55,65,81,0.5)">
@@ -88,14 +89,15 @@
       },
       async fetchPlaylist() {
         try {
-          
-          
           const { data } = await axiosInstance.get("/get-playlists");
           console.log("data = ", data);
           this.playlists = data;
         } catch (err) {
           console.error("Erro ao buscar playlist:", err);
         }
+      },
+      goToPlaylist(playlistId) {
+        this.$router.push({ name: "playlist-detail", params: { id: playlistId } });
       },
     },
   };

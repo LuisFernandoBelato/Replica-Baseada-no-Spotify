@@ -5,6 +5,7 @@ import LibraryView  from '@/views/LibraryView.vue'
 import UsersView    from '@/views/UsersView.vue'
 import PlaylistsView from '@/views/PlaylistsView.vue'
 import SongsView    from '@/views/SongsView.vue'
+import PlaylistDetailComponent from '@/components/PlaylistDetail.vue'
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/songs',
     name: 'songs',
     component: SongsView,
+  },
+  {
+    path: "/playlist/:id",
+    name: "playlist-detail",
+    component: PlaylistDetailComponent,
   }
 ]
 
