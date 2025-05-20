@@ -6,6 +6,8 @@ import router from './routes/routes.js';
 import connectDB from './config/db.js';
 import cors from 'cors';   
 
+import Usuario from './models/Usuario/Usuario.js';
+
 import { 
     staticMiddleware, 
     urlencodedMiddleware,  
@@ -32,14 +34,11 @@ app.use(compressionMiddleware);
 app.use(urlencodedMiddleware);
 //app.use(morganMiddleware);
 
-// por algo assim:
 app.use(
   '/backend/uploads',
   express.static(path.join(__dirname, 'backend/uploads'), {
     setHeaders: (res, filePath) => {
-      // permite qualquer origem — ajuste se quiser restringir
       res.setHeader('Access-Control-Allow-Origin', '*');
-      // para range requests funcionar corretamente
       res.setHeader('Accept-Ranges', 'bytes');
     }
   })
@@ -47,6 +46,16 @@ app.use(
 
 app.use(router);
 
-app.listen(port, () => {
-    console.log(`Servidor ativo rodando na porta ${port}`)
+
+
+app.listen(port, async () => {
+  const usuarioExists = await Usuario.findByEmail("admin@admin.com");
+  console.log("usuarioExists = ", usuarioExists)
+
+  if (usuarioExists.length == 0)
+  {
+    const novoUsuario = new Usuario("Admin", "admin@admin.com", "123", "Rua", "Bairro", "ET", "00000-000"); 
+    novoUsuario.save();
+  }
+  console.log(`Servidor ativo rodando na porta ${port}`)
 });
