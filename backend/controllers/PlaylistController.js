@@ -102,8 +102,9 @@ class PlaylistController
     
     try
     {
-        if (await Playlist.update(id, newPlaylist))
-            return res.status(201).json({updatePlaylist: newPlaylist, message: "Playlist atualizada com Sucesso !"});
+      let updatePlaylist = await Playlist.update(id, newPlaylist);
+        if (updatePlaylist)
+            return res.status(201).json({updatePlaylist: updatePlaylist, message: "Playlist atualizada com Sucesso !"});
         else
             return res.status(400).json({message: "Playlist não está cadastrada."});
     }

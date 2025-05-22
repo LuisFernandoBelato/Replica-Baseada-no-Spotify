@@ -61,7 +61,9 @@ class Playlist
     }
     static async update (id, data)
     {
-        return await PlaylistModel.findByIdAndUpdate(id, data, { new: true });
+        data.musicas = data.musicasIdsArray;
+        let retorno = await PlaylistModel.findByIdAndUpdate(id, data, { new: true });
+        return retorno;
     }
     static async delete (id) 
     {
