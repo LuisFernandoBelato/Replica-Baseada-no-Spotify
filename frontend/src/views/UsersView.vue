@@ -113,8 +113,11 @@
             <label class="block text-gray-400 mb-2">CEP</label>
             <input
               v-model="user.cep"
+              @input="maskCep"
               @blur="fetchAddress"
               type="text"
+              inputmode="numeric"
+              maxlength="9"
               required
               placeholder="12345-678"
               class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-green-500"
@@ -206,6 +209,18 @@ export default {
     this.fetchUsers();
   },
   methods: {
+      maskCep(event) {
+      
+      let digits = event.target.value.replace(/\D/g, '');
+
+      
+      if (digits.length > 5) {
+        digits = digits.slice(0, 5) + '-' + digits.slice(5, 8);
+      }
+
+      
+      this.user.cep = digits;
+    },
     // LIST
     async fetchUsers() {
       try {
