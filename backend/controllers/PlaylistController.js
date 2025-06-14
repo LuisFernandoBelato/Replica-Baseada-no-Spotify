@@ -99,6 +99,13 @@ class PlaylistController
       permission
     }
     //console.log("newPlaylist = ", newPlaylist)
+
+    if (!thumbnailPath)
+    {
+      const playlist = await Playlist.findById(id);
+      if (playlist)
+        newPlaylist.thumbnailPath = playlist.thumbnailPath;
+    }
     
     try
     {

@@ -100,21 +100,19 @@ export default {
       this.showPassword = !this.showPassword;
     },
     async login() {
-      this.error = "";
       try {
-        const payload = {
+        const response = await axiosInstance.post("/login", {
           email: this.form.email,
           senha: this.form.senha,
-        };
-        const { data: user } = await axiosInstance.post("/login", payload);
-        localStorage.setItem("loggedUser", JSON.stringify(user));
-        this.$router.push({ name: "home" });
-      } catch (err) {
-        this.error =
-          err.response?.status === 401
-            ? "Email ou senha inválidos."
-            : "Ocorreu um erro. Tente novamente.";
-        console.error(err);
+        });
+
+        // Armazena os dados do usuário
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        
+        this.$router.push("/home");
+      } catch (error) {
+        console.error("Erro no login:", error);
+        this.error = error.response?.data?.message || "Erro ao fazer login";
       }
     },
   },

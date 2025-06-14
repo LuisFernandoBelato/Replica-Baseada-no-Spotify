@@ -194,12 +194,11 @@ export default {
     },
     async fetchPlaylists() {
       try {
-        const logged = JSON.parse(localStorage.getItem('loggedUser') || '{}');
-        const userId = logged._id;
-        const { data } = await axiosInstance.get(`/get-playlists-by-user/${userId}`);
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const { data } = await axiosInstance.get(`/get-playlists-by-user/${user.id}`);
         this.playlists = data;
       } catch (err) {
-        console.error(err);
+        console.error("Erro ao carregar playlists:", err);
       }
     },
 
@@ -236,11 +235,11 @@ export default {
     // Cria nova
     async createPlaylist() {
       try {
-        const logged = JSON.parse(localStorage.getItem("loggedUser") || "{}");
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
         const formData = new FormData();
         formData.append("nome", this.playlist.nome);
         formData.append("descricao", this.playlist.descricao);
-        formData.append("donoId", logged._id);
+        formData.append("donoId", user.id);
         formData.append("musicasIdsArray", JSON.stringify(this.playlist.musicsIds));
         formData.append("permission", this.playlist.permission);
         if (this.playlist.thumbnailFile) {
@@ -249,12 +248,12 @@ export default {
         await axiosInstance.post("/create-playlist", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        this.mensagem = `Playlist "${this.playlist.nome}" criada!`;
+        this.mensagem = `Playlist "${this.playlist.nome}" criada com sucesso!`;
         this.closeModal();
         this.fetchPlaylists();
       } catch (err) {
-        console.error(err);
-        this.mensagem = `Erro ao criar playlist: ${err.response?.data?.message || err.message}`;
+        console.error("Erro ao criar playlist:", err);
+        this.mensagem = "Erro ao criar playlist. Tente novamente.";
       }
     },
 

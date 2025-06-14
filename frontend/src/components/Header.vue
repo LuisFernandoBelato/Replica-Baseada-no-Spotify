@@ -13,15 +13,18 @@
   </template>
   
   <script>
+  import axiosInstance from '@/services/axiosInstance';
+  
   export default {
     name: "HeaderComponent",
     methods: {
-      logout() {
-        // Limpa os dados do localStorage
-        localStorage.removeItem('loggedUser');
-  
-        // Redireciona para a página inicial (home)
-        this.$router.push('/');
+      async logout() {
+        try {
+          await axiosInstance.post('/logout');
+          this.$router.push('/');
+        } catch (error) {
+          console.error('Erro ao fazer logout:', error);
+        }
       },
     },
   };

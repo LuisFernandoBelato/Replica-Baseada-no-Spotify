@@ -1,4 +1,5 @@
 import Usuario from "../models/Usuario/Usuario.js";
+import bcrypt from 'bcrypt';
 
 class UsuarioController
 {
@@ -16,12 +17,13 @@ class UsuarioController
 
     const usuarioExiste = await Usuario.findByEmail(email);
   
-    if (usuarioExiste.length > 0)
+    if (usuarioExiste)
         return res.status(400).json({message: "Já existe um Usuário com esse Email."});
 
     try
     {
-        const novoUsuario = new Usuario(nome, email, senha, logradouro, bairro, estado, cep); 
+        const senhaCriptografada = await bcrypt.hash(senha, 10);
+        const novoUsuario = new Usuario(nome, email, senhaCriptografada, logradouro, bairro, estado, cep); 
         await novoUsuario.save();
         return res.status(201).json(novoUsuario);
     }

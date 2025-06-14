@@ -10,6 +10,11 @@ const router = express.Router();
 // AUTENTICAÇÃO
 
 router.post("/login", AuthController.Login);
+router.post("/logout", AuthController.Logout);
+router.get("/verify-auth", (req, res) => {
+    // Se chegou aqui, significa que o middleware de autenticação já verificou o token
+    res.status(200).json({ message: "Autenticado" });
+});
 
 // USUÁRIOS
 

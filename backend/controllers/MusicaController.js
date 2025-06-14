@@ -103,8 +103,19 @@ class MusicaController
       filePath,
       thumbnailPath
     };
-    console.log("newMusica = ", newMusica)
-
+    
+    if (!thumbnailPath || !filePath)
+    {
+      const musica = await Musica.findById(id);
+      if (musica)
+      {
+         if (!thumbnailPath)
+            newMusica.thumbnailPath = musica.thumbnailPath;
+         if (!filePath)
+            newMusica.filePath = musica.filePath;
+      }
+    }
+    
     try
     {
         if (await Musica.update(id, newMusica))

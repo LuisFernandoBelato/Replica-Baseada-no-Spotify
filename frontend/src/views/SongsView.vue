@@ -180,37 +180,34 @@ export default {
     // LIST
     async fetchSongs() {
       try {
-        const logged = JSON.parse(localStorage.getItem('loggedUser') || '{}');
-        const userId = logged._id;
-        const { data } = await axiosInstance.get(`/get-musics-by-user/${userId}`);
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const { data } = await axiosInstance.get(`/get-musics-by-user/${user.id}`);
         this.songs = data;
       } catch (err) {
-        console.error(err);
-        this.mensagem = 'Erro ao carregar músicas.';
+        console.error("Erro ao carregar músicas:", err);
       }
     },
 
     // CREATE
     async createSong() {
       try {
-        const logged = JSON.parse(localStorage.getItem('loggedUser') || '{}');
-        const autorId = logged._id;
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
         const formData = new FormData();
         formData.append("nome", this.song.nome);
         formData.append("artist", this.song.artist);
         formData.append("genero", this.song.genero);
-        formData.append("autorId", autorId);
+        formData.append("autorId", user.id);
         formData.append("audioFile", this.song.audioFile);
         formData.append("thumbnailFile", this.song.thumbnailFile);
         await axiosInstance.post("/create-music", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        this.mensagem = `Música “${this.song.nome}” cadastrada com sucesso!`;
+        this.mensagem = `Música "${this.song.nome}" cadastrada com sucesso!`;
         this.closeModal();
         this.fetchSongs();
-      } catch (error) {
-        console.error(error);
-        this.mensagem = `Erro ao cadastrar música: ${error.response?.data?.message || error.message}`;
+      } catch (err) {
+        console.error("Erro ao criar música:", err);
+        this.mensagem = "Erro ao criar música. Tente novamente.";
       }
     },
 

@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import axiosInstance from '@/services/axiosInstance'
 
 import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
@@ -58,25 +59,18 @@ const router = createRouter({
   routes
 })
 
-
-router.beforeEach((to, from, next) => {
-  const loggedUser = localStorage.getItem('loggedUser')
-  let isAuthenticated = false
-
-  try {
-    const parsedUser = JSON.parse(loggedUser)
-
-    if (parsedUser && Object.keys(parsedUser).length > 0) {
-      isAuthenticated = true
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.requiresAuth) {
+    try {
+      // Tenta fazer uma requisição para verificar se o usuário está autenticado
+      await axiosInstance.get('/verify-auth');
+      next();
+    } catch (error) {
+      // Se houver erro, redireciona para o login
+      next({ name: 'login' });
     }
-  } catch (e) {
-    isAuthenticated = false
-  }
-
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next({ name: 'login' })
   } else {
-    next()
+    next();
   }
 })
 
