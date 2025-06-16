@@ -1,4 +1,4 @@
-# 🎧 MusicStream: Uma Réplica Baseada no Spotify
+# 🎧 MusicStream: Uma Réplica Baseada no Spotify \ ***7º Termo - LP 2***
 
 Este projeto é uma aplicação web full-stack desenvolvida como uma réplica simplificada do Spotify, focada no gerenciamento de usuários, músicas e playlists. Ele é construído com um backend em Node.js (Express), um frontend em Vue.js e utiliza MongoDB como banco de dados, tudo orquestrado via Docker Compose para um ambiente de desenvolvimento consistente.
 
